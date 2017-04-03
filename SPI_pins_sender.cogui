@@ -18,11 +18,11 @@
 </editorArea>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="Z:/USER/CoIDE/workspace/SPI_pins_sender/app/main.c" title="main.c" tooltip="Z:/USER/CoIDE/workspace/SPI_pins_sender/app/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SPI_pins_sender/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1595" selectionTopPixel="951"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1024" selectionTopPixel="210"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f0xx_conf.h" partName="stm32f0xx_conf.h" path="Z:/USER/CoIDE/workspace/SPI_pins_sender/app/stm32f0xx_conf.h" title="stm32f0xx_conf.h" tooltip="Z:/USER/CoIDE/workspace/SPI_pins_sender/app/stm32f0xx_conf.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SPI_pins_sender/stm32f0xx_conf.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2036" selectionTopPixel="420"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1647" selectionTopPixel="420"/>
 </editor>
 </editors>
 <views>
@@ -38,7 +38,7 @@
 <element path="/SPI_pins_sender/components"/>
 </expanded>
 <selection>
-<element path="/SPI_pins_sender/main.c"/>
+<element path="/SPI_pins_sender"/>
 </selection>
 </viewState>
 </view>
@@ -84,8 +84,8 @@
 <hide_menu_item_id id="org.coocox.codebugger.configuration.showMemoryBrowserAction"/>
 <hide_menu_item_id id="org.coocox.codebugger.configuration.showVariablesAction"/>
 <hide_menu_item_id id="org.coocox.builder.ui.openProjectExplorerAction"/>
-<hide_menu_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
 <hide_menu_item_id id="org.coocox.codebugger.trace.actions.ShowTraceControlAction"/>
+<hide_menu_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
 <hide_menu_item_id id="org.coocox.codebugger.configuration.showRegistersAction"/>
 <hide_toolbar_item_id id="org.eclipse.cdt.debug.internal.ui.actions.ToggleInstructionStepModeAction"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
@@ -250,46 +250,8 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/SPI_pins_sender/components/stm32f0xx.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/SPI_pins_sender/components/system_stm32f0xx.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/SPI_pins_sender/stm32f0xx_conf.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/SPI_pins_sender/stm32f0xx_conf.h"/>
 </editors>
-<item historyLabel="main.c" index="0">
-<position/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="12704" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="10890" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="7109" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="7606" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="2395" y="11"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="13408" y="12"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="14832" y="0"/>
-</item>
-<item historyLabel="stm32f0xx_gpio.c" index="1">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="14832" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="9273" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="9416" y="0"/>
-</item>
-<item historyLabel="stm32f0xx_gpio.c" index="1">
-<position info="not_deleted" x="16957" y="13"/>
-</item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="9416" y="0"/>
 </item>
@@ -398,8 +360,47 @@
 <item historyLabel="stm32f0xx_conf.h" index="10">
 <position info="not_deleted" x="2036" y="0"/>
 </item>
-<item active="true" historyLabel="main.c" index="7">
+<item historyLabel="main.c" index="7">
 <position info="not_deleted" x="723" y="0"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="721" y="0"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="173" y="11"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="2195" y="17"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="2335" y="55"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="341" y="0"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="954" y="41"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="608" y="0"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="2168" y="56"/>
+</item>
+<item historyLabel="stm32f0xx_conf.h" index="11">
+<position info="not_deleted" x="1647" y="0"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="2171" y="23"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="942" y="0"/>
+</item>
+<item historyLabel="main.c" index="7">
+<position info="not_deleted" x="1417" y="11"/>
+</item>
+<item active="true" historyLabel="main.c" index="7">
+<position info="not_deleted" x="2810" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -408,6 +409,16 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage" name="" tooltip="">
+<persistable>
+<org.coocox.welcome.ui.WelcomePage/>
+</persistable>
+</file>
+<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage" name="" tooltip="">
+<persistable>
+<org.coocox.welcome.ui.WelcomePage/>
+</persistable>
+</file>
 <file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage" name="" tooltip="">
 <persistable>
 <org.coocox.welcome.ui.WelcomePage/>
@@ -444,12 +455,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f0xx_tim.h" tooltip="WI-FI_Fan_with_humidity_sensor/components/stm32f0xx_tim.h">
 <persistable path="/WI-FI_Fan_with_humidity_sensor/components/stm32f0xx_tim.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="startup_stm32f0xx.s" tooltip="WI-FI_Fan_with_humidity_sensor/components/startup_stm32f0xx.s">
-<persistable path="/WI-FI_Fan_with_humidity_sensor/components/startup_stm32f0xx.s"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="startup_stm32f0xx.s" tooltip="WI-FI_Fan_with_humidity_sensor/components/startup_stm32f0xx.s">
-<persistable path="/WI-FI_Fan_with_humidity_sensor/components/startup_stm32f0xx.s"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.asm.AsmEditor" name="startup_stm32f0xx.s" tooltip="WI-FI_Fan_with_humidity_sensor/components/startup_stm32f0xx.s">
 <persistable path="/WI-FI_Fan_with_humidity_sensor/components/startup_stm32f0xx.s"/>

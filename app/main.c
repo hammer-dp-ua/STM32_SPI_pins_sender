@@ -21,6 +21,7 @@ unsigned int general_flags;
 void Clock_Config();
 void Pins_Config();
 void TIMER14_Confing();
+void SPI_Config();
 void set_flag(unsigned int *flags, unsigned int flag_value);
 void reset_flag(unsigned int *flags, unsigned int flag_value);
 unsigned char read_flag_state(unsigned int *flags, unsigned int flag_value);
@@ -35,18 +36,18 @@ int main() {
    Clock_Config();
    Pins_Config();
    TIMER14_Confing();
+   SPI_Config();
 
    while (1) {
-
+      SPI_SendData8(SPI1, 0xCC);
    }
-
 }
 
 void Clock_Config() {
    RCC_SYSCLKConfig(RCC_SYSCLKSource_HSI);
    RCC_PLLCmd(DISABLE);
    while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == SET);
-   RCC_PLLConfig(RCC_PLLSource_HSI_Div2, RCC_PLLMul_4); // 8MHz / 2 * 4
+   RCC_PLLConfig(RCC_PLLSource_HSI_Div2, RCC_PLLMul_4); // 8MHz / 2 * 4 = 16MHz
    RCC_PCLKConfig(RCC_HCLK_Div1);
    RCC_PLLCmd(ENABLE);
    while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET);
@@ -90,6 +91,34 @@ void TIMER14_Confing() {
    TIM_ITConfig(TIM14, TIM_IT_Update, ENABLE);
 
    TIM_Cmd(TIM14, ENABLE);
+}
+
+void SPI_Config() {
+   RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
+
+   GPIO_InitTypeDef pins_config;
+   pins_config.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_7;
+   pins_config.GPIO_Mode = GPIO_Mode_AF;
+   pins_config.GPIO_Speed = GPIO_Speed_Level_2; // 10 MHz
+   pins_config.GPIO_PuPd = GPIO_PuPd_UP;
+   GPIO_Init(GPIOA, &pins_config);
+
+   GPIO_PinAFConfig(GPIOA, GPIO_PinSource4, GPIO_AF_0);
+   GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_0);
+   GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_0); // SPI1_MOSI
+
+   SPI_InitTypeDef spi_config;
+   spi_config.SPI_Direction = SPI_Direction_1Line_Tx;
+   spi_config.SPI_Mode = SPI_Mode_Master;
+   spi_config.SPI_DataSize = SPI_DataSize_8b;
+   spi_config.SPI_CPOL = SPI_CPOL_Low;
+   spi_config.SPI_CPHA = SPI_CPHA_2Edge;
+   spi_config.SPI_NSS = SPI_NSS_Hard;
+   spi_config.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8; // 16MHz / 2Mhz of ESP8266
+   spi_config.SPI_FirstBit = SPI_FirstBit_MSB;
+   SPI_Init(SPI1, &spi_config);
+
+   SPI_Cmd(SPI1, ENABLE);
 }
 
 void set_flag(unsigned int *flags, unsigned int flag_value) {

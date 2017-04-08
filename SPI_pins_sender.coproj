@@ -17,10 +17,9 @@
           <Includepath path="."/>
         </Includepaths>
         <DefinedSymbols>
-          <Define name="STM32F030C8T6"/>
           <Define name="STM32F030"/>
-          <Define name="ARM_MATH_CM0"/>
           <Define name="USE_STDPERIPH_DRIVER"/>
+          <Define name="STM32F030C6T6"/>
         </DefinedSymbols>
       </Compile>
       <Link useDefault="0">
@@ -30,15 +29,15 @@
         <Option name="nostartfiles" value="0"/>
         <Option name="LTO" value="0"/>
         <Option name="IsNewStartupCode" value="1"/>
-        <Option name="Library" value="Use base C Library"/>
+        <Option name="Library" value="Not use C Library"/>
         <Option name="Printf" value="0"/>
         <Option name="Scanf" value="0"/>
         <LinkedLibraries>
           <Libset dir="c:\gcc-arm-none-eabi-5_4-2016q3-20160926-win32\arm-none-eabi\lib\thumb\" libs="nosys"/>
         </LinkedLibraries>
         <MemoryAreas debugInFlashNotRAM="1">
-          <Memory name="IROM1" type="ReadOnly" size="0x00010000" startValue="0x08000000"/>
-          <Memory name="IRAM1" type="ReadWrite" size="0x00002000" startValue="0x20000000"/>
+          <Memory name="IROM1" type="ReadOnly" size="0x8000" startValue="0x8000000"/>
+          <Memory name="IRAM1" type="ReadWrite" size="0x1000" startValue="0x20000000"/>
           <Memory name="IROM2" type="ReadOnly" size="" startValue=""/>
           <Memory name="IRAM2" type="ReadWrite" size="" startValue=""/>
         </MemoryAreas>
@@ -97,6 +96,7 @@
     <File name="components/stm32f0xx_dbgmcu.h" path="components/stm32f0xx_dbgmcu.h" type="1"/>
     <File name="stm32f0xx_dbgmcu.c" path="app/stm32f0xx_dbgmcu.c" type="1"/>
     <File name="stm32f0xx_pwr.c" path="app/stm32f0xx_pwr.c" type="1"/>
+    <File name="components/stm32f0xx_misc.h" path="components/stm32f0xx_misc.h" type="1"/>
     <File name="components/core_cm0.h" path="components/core_cm0.h" type="1"/>
     <File name="stm32f0xx_conf.h" path="app/stm32f0xx_conf.h" type="1"/>
     <File name="stm32f0xx_rcc.c" path="app/stm32f0xx_rcc.c" type="1"/>
@@ -105,8 +105,9 @@
     <File name="components/stm32f0xx_tim.h" path="components/stm32f0xx_tim.h" type="1"/>
     <File name="system_stm32f0xx.c" path="app/system_stm32f0xx.c" type="1"/>
     <File name="components/stm32f0xx_syscfg.h" path="components/stm32f0xx_syscfg.h" type="1"/>
-    <File name="stm32f0xx_dma.c" path="app/stm32f0xx_dma.c" type="1"/>
     <File name="components" path="" type="2"/>
+    <File name="stm32f0xx_dma.c" path="app/stm32f0xx_dma.c" type="1"/>
+    <File name="stm32f0xx_misc.c" path="app/stm32f0xx_misc.c" type="1"/>
     <File name="components/stm32f0xx_gpio.h" path="components/stm32f0xx_gpio.h" type="1"/>
     <File name="components/stm32f0xx_usart.h" path="components/stm32f0xx_usart.h" type="1"/>
     <File name="components/stm32f0xx_exti.h" path="components/stm32f0xx_exti.h" type="1"/>

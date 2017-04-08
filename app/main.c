@@ -12,11 +12,20 @@
 #define TIMER14_PRESCALER 0xFFFF
 #define TIMER14_TACTS_PER_SECOND (CLOCK_SPEED / TIMER14_PERIOD / TIMER14_PRESCALER)
 
-#define TIMER3_PERIOD_MS 0.13f
-#define TIMER3_PERIOD_S (TIMER3_PERIOD_MS / 1000)
-#define TIMER3_250MS (unsigned short)(250 / TIMER3_PERIOD_MS)
+#define TIMER14_100MS 1
+#define TIMER14_200MS 2
+#define TIMER14_500MS 5
+#define TIMER14_1S 10
+#define TIMER14_2S 20
+#define TIMER14_3S 30
+#define TIMER14_5S 50
+#define TIMER14_10S 102
+#define TIMER14_30S 305
+#define TIMER14_60S 610
+#define TIMER14_10MIN 6103
 
-unsigned int general_flags;
+volatile unsigned int general_flags;
+volatile unsigned short spi_sender_counter;
 
 void Clock_Config();
 void Pins_Config();
@@ -29,7 +38,14 @@ unsigned char read_flag_state(unsigned int *flags, unsigned int flag_value);
 void TIM14_IRQHandler() {
    TIM_ClearITPendingBit(TIM14, TIM_IT_Update);
 
+   spi_sender_counter++;
+}
 
+void SPI1_IRQHandler(void) {
+   if (SPI_I2S_GetITStatus(SPI1, SPI_I2S_IT_TXE) == SET) {
+      SPI_SendData8(SPI1, 0xAA);
+      SPI_I2S_ITConfig(SPI1, SPI_I2S_IT_TXE, DISABLE);
+   }
 }
 
 int main() {
@@ -39,7 +55,11 @@ int main() {
    SPI_Config();
 
    while (1) {
-      SPI_SendData8(SPI1, 0xCC);
+      if (spi_sender_counter >= TIMER14_10S) {
+         spi_sender_counter = 0;
+         // Enable the Tx buffer empty interrupt
+         SPI_I2S_ITConfig(SPI1, SPI_I2S_IT_TXE, ENABLE);
+      }
    }
 }
 
@@ -96,16 +116,19 @@ void TIMER14_Confing() {
 void SPI_Config() {
    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
-   GPIO_InitTypeDef pins_config;
-   pins_config.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_7;
-   pins_config.GPIO_Mode = GPIO_Mode_AF;
-   pins_config.GPIO_Speed = GPIO_Speed_Level_2; // 10 MHz
-   pins_config.GPIO_PuPd = GPIO_PuPd_UP;
-   GPIO_Init(GPIOA, &pins_config);
-
-   GPIO_PinAFConfig(GPIOA, GPIO_PinSource4, GPIO_AF_0);
+   //GPIO_PinAFConfig(GPIOA, GPIO_PinSource4, GPIO_AF_0);
    GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_0);
    GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_0); // SPI1_MOSI
+
+   GPIO_InitTypeDef pins_config;
+   pins_config.GPIO_Pin = GPIO_Pin_5;
+   pins_config.GPIO_Mode = GPIO_Mode_AF;
+   pins_config.GPIO_Speed = GPIO_Speed_Level_3; // 10 MHz
+   pins_config.GPIO_OType = GPIO_OType_PP;
+   pins_config.GPIO_PuPd = GPIO_PuPd_DOWN;
+   GPIO_Init(GPIOA, &pins_config);
+   pins_config.GPIO_Pin = GPIO_Pin_7;
+   GPIO_Init(GPIOA, &pins_config);
 
    SPI_InitTypeDef spi_config;
    spi_config.SPI_Direction = SPI_Direction_1Line_Tx;
@@ -113,10 +136,16 @@ void SPI_Config() {
    spi_config.SPI_DataSize = SPI_DataSize_8b;
    spi_config.SPI_CPOL = SPI_CPOL_Low;
    spi_config.SPI_CPHA = SPI_CPHA_2Edge;
-   spi_config.SPI_NSS = SPI_NSS_Hard;
+   spi_config.SPI_NSS = SPI_NSS_Soft;
    spi_config.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8; // 16MHz / 2Mhz of ESP8266
    spi_config.SPI_FirstBit = SPI_FirstBit_MSB;
    SPI_Init(SPI1, &spi_config);
+
+   NVIC_InitTypeDef NVIC_InitStructure;
+   NVIC_InitStructure.NVIC_IRQChannel = SPI1_IRQn;
+   NVIC_InitStructure.NVIC_IRQChannelPriority = 1;
+   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+   NVIC_Init(&NVIC_InitStructure);
 
    SPI_Cmd(SPI1, ENABLE);
 }

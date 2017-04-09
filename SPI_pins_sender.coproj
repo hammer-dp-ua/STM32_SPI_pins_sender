@@ -92,8 +92,8 @@
     <File name="components/stm32f0xx.h" path="components/stm32f0xx.h" type="1"/>
     <File name="components/stm32f0xx_spi.h" path="components/stm32f0xx_spi.h" type="1"/>
     <File name="stm32f0xx_usart.c" path="app/stm32f0xx_usart.c" type="1"/>
-    <File name="components/arm_math.h" path="components/arm_math.h" type="1"/>
     <File name="components/stm32f0xx_dbgmcu.h" path="components/stm32f0xx_dbgmcu.h" type="1"/>
+    <File name="components/arm_math.h" path="components/arm_math.h" type="1"/>
     <File name="stm32f0xx_dbgmcu.c" path="app/stm32f0xx_dbgmcu.c" type="1"/>
     <File name="stm32f0xx_pwr.c" path="app/stm32f0xx_pwr.c" type="1"/>
     <File name="components/stm32f0xx_misc.h" path="components/stm32f0xx_misc.h" type="1"/>

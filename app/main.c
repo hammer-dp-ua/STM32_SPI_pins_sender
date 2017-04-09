@@ -116,19 +116,18 @@ void TIMER14_Confing() {
 void SPI_Config() {
    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
 
-   //GPIO_PinAFConfig(GPIOA, GPIO_PinSource4, GPIO_AF_0);
-   GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_0);
-   GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_0); // SPI1_MOSI
-
    GPIO_InitTypeDef pins_config;
-   pins_config.GPIO_Pin = GPIO_Pin_5;
+   pins_config.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_7;
    pins_config.GPIO_Mode = GPIO_Mode_AF;
    pins_config.GPIO_Speed = GPIO_Speed_Level_3; // 10 MHz
    pins_config.GPIO_OType = GPIO_OType_PP;
    pins_config.GPIO_PuPd = GPIO_PuPd_DOWN;
    GPIO_Init(GPIOA, &pins_config);
-   pins_config.GPIO_Pin = GPIO_Pin_7;
-   GPIO_Init(GPIOA, &pins_config);
+
+   // YES! Firstly pins MUST be configured and only after their alternate config. Not like in doc of driver.
+   //GPIO_PinAFConfig(GPIOA, GPIO_PinSource4, GPIO_AF_0);
+   GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_0);
+   GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_0); // SPI1_MOSI
 
    SPI_InitTypeDef spi_config;
    spi_config.SPI_Direction = SPI_Direction_1Line_Tx;
@@ -136,7 +135,7 @@ void SPI_Config() {
    spi_config.SPI_DataSize = SPI_DataSize_8b;
    spi_config.SPI_CPOL = SPI_CPOL_Low;
    spi_config.SPI_CPHA = SPI_CPHA_2Edge;
-   spi_config.SPI_NSS = SPI_NSS_Soft;
+   spi_config.SPI_NSS = SPI_NSS_Soft; // When SPI_NSS_Hard, the pin MUST be connected to Vcc
    spi_config.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8; // 16MHz / 2Mhz of ESP8266
    spi_config.SPI_FirstBit = SPI_FirstBit_MSB;
    SPI_Init(SPI1, &spi_config);
